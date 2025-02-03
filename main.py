@@ -3,17 +3,12 @@ import time
 from langchain_ollama import ChatOllama
 from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_groq import ChatGroq
 import pdfplumber
 import shutil
 import subprocess
-import screen_brightness_control as sbc
-from comtypes import CLSCTX_ALL
 import psutil
-from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
-API_KEY = "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"
+from langchain_groq import ChatGroq
 
 @tool
 def convert_bytes(bytes):
@@ -207,7 +202,7 @@ def main():
     system = "You are a helpful assistant. Use the tools that you have available when you need it. Tools: convert_bytes,make_dir,run_command,count_size_dir,move_file,make_file,search_file_by_content. Keep in mind that you are running on a Windows machine."
     human = "{text}"
     prompt = ChatPromptTemplate.from_messages([("system", system), ("human", human)])
-    chat = ChatGroq(temperature=0, model="llama-3.3-70b-versatile", api_key=API_KEY).bind_tools(tools=[convert_bytes,make_dir,run_command,count_size_dir,move_file,make_file,search_file_by_content])
+    chat = ChatGroq(temperature=0, model="llama-3.3-70b-versatile").bind_tools(tools=[convert_bytes,make_dir,run_command,count_size_dir,move_file,make_file,search_file_by_content])
 
     chain = prompt | chat
     input_text = input("Prompt: ")
