@@ -17,7 +17,11 @@ Local model of the main assistant: llama-3.3-70b-versatile
 
 Local model of the file analizer: llama3.1:8b
 
+## Environment
 
+For the execution of this script you need to setup the following environment variables:
+
+- GROQ_API_KEY
 
 
 
